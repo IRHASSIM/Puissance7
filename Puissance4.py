@@ -6,12 +6,14 @@ grille=[[0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0]]
 import random
 
+#1
 def grille_vide():
     return [[0 for j in range(7)] for i in range(6)]
 grille_vide()     
 assert len(grille_vide())==6
 assert len(grille_vide()[0])==7 
 
+#2
 def affiche(gril):
     n=6
     print("  0 1 2 3 4 5 6")
@@ -27,7 +29,7 @@ def affiche(gril):
                 print("|O",end="")
         print("|")
                 
-
+#3
 def coup_possible(gril,col):   
     if gril[0][col]==0:
         return True
@@ -35,6 +37,7 @@ def coup_possible(gril,col):
         return False
 assert coup_possible(grille_vide(),2)==True
 
+#4
 def jouer(gril,j,col):
     if gril[5][col]==0:
         gril[5][col]=j
@@ -50,6 +53,7 @@ def jouer(gril,j,col):
         gril[0][col]=j
     return gril
 
+#5
 def horiz(gril,j,lig):
     if gril[lig][0]==j and gril[lig][1]==j and gril[lig][2]==j and gril[lig][3]==j:
         return True
@@ -60,6 +64,7 @@ def horiz(gril,j,lig):
     if gril[lig][3]==j and gril[lig][4]==j and gril[lig][5]==j and gril[lig][6]==j:
         return True
 
+#6
 def vert(gril,j,col):
     if gril[5][col]==j and gril[4][col]==j and gril[3][col]==j and gril[2][col]:
         return True
@@ -67,17 +72,44 @@ def vert(gril,j,col):
         return True
     if gril[3][col]==j and gril[2][col]==j and gril[1][col]==j and gril[0][col]:
         return True
+#7
+def diag_bas(gril,j,lig,col):
+    if lig<3 and col>2:
+        if gril[lig][col]==j and gril[lig+1][col-1]==j and gril[lig+2][col-2]==j and gril[lig+3][col-3]:
+            return True
+        else:
+            return False
+    if lig<3 and col<4:
+        if gril[lig][col]==j and gril[lig+1][col+1]==j and gril[lig+2][col+2]==j and gril[lig+3][col+3]:
+            return True
+        else:
+            return False
 
+#8
+def diag_haut(gril,j,lig,col):
+    if lig>2 and col>2:
+        if gril[lig][col]==j and gril[lig-1][col-1]==j and gril[lig-2][col-2]==j and gril[lig-3][col-3]:
+            return True
+        else:
+            return False
+    if lig>2 and col<4:    
+        if gril[lig][col]==j and gril[lig-1][col+1]==j and gril[lig-2][col+2]==j and gril[lig-3][col+3]:
+            return True
+        else:
+            return False
+#9
 def victoire():
     while vert==False or horiz==False or diag_bas==False or diag_haut== False:
         return False
     return True
 
+#10
 def match_nul(gril):
     if gril[0][0]!=0 and gril[0][1]!=0 and gril[0][2]!=0 and gril[0][3]!=0 and gril[0][4]!=0 and gril[0][5]!=0 and gril[0][6]!=0:
         return True
     return False
 
+#11
 def coup_aléatoire(gril,j):
     a=random.randint(0,6)
     if gril[5][a]==0:
